@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:TipCalculatorV0"
              x:Class="TipCalculatorV0.MainPage">
 
-	<Label Text="Welcome to Xamarin.Forms!" 
+	<Label Text="Hello World" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
 
