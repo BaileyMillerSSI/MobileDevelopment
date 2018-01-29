@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.school.penncollege.tipcalculatorv5.MainActivity">
-
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.school.penncollege.tipcalculatorv5.MainActivity">
     <TextView
         android:id="@+id/label_bill"
         style="@style/LabelStyle"
@@ -85,4 +84,4 @@
         android:layout_alignBottom="@+id/label_total"
         android:layout_alignRight="@id/amount_bill" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
