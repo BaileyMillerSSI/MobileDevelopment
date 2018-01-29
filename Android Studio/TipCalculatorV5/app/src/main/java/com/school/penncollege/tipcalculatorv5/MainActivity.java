@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
             tipEditText = ( EditText ) findViewById( R.id.amount_tip_percent );
             tipEditText.setText(_text);
+
+
+            calculate();
         }
     }
 
