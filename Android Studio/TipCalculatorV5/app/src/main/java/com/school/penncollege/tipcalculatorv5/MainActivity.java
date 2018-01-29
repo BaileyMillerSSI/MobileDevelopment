@@ -63,26 +63,33 @@ public class MainActivity extends AppCompatActivity {
 
         RadioButton rd;
 
-        if(tipString == "10")
+        switch (tipString)
         {
-            rd = (RadioButton) findViewById(R.id.radio_ten);
-            rd.setChecked(true);
-        }else if(tipString == "15")
-        {
-            rd = (RadioButton) findViewById(R.id.radio_fifteen);
-            rd.setChecked(true);
-        }else if(tipString == "20")
-        {
-            rd = (RadioButton) findViewById(R.id.radio_twenty);
-            rd.setChecked(true);
+            case "10":
+                rd = (RadioButton) findViewById(R.id.radio_ten);
+                rd.setChecked(true);
+                break;
+            case "15":
+                rd = (RadioButton) findViewById(R.id.radio_fifteen);
+                rd.setChecked(true);
+                break;
+                
+            case "20":
+                rd = (RadioButton) findViewById(R.id.radio_twenty);
+                rd.setChecked(true);
+                break;
+            default:
+                rd = (RadioButton) findViewById(R.id.radio_ten);
+                rd.setChecked(false);
+
+                rd = (RadioButton) findViewById(R.id.radio_fifteen);
+                rd.setChecked(false);
+
+                rd = (RadioButton) findViewById(R.id.radio_twenty);
+                rd.setChecked(false);
+                break;
+
         }
-
-
-
-
-
-
-
         TextView tipTextView =
                 ( TextView ) findViewById( R.id.amount_tip );
         TextView totalTextView =
