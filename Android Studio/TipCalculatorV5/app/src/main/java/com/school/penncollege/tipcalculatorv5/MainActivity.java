@@ -28,6 +28,25 @@ public class MainActivity extends AppCompatActivity {
         tipEditText.addTextChangedListener(tch);
     }
 
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_ten:
+                if (checked)
+
+                    break;
+            case R.id.radio_fifteen:
+                if (checked)
+
+                    break;
+        }
+    }
+
+
     public void calculate( ) {
         String billString = billEditText.getText( ).toString( );
         String tipString = tipEditText.getText( ).toString( );

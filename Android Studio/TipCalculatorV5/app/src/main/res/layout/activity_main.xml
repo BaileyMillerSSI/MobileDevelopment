@@ -44,22 +44,28 @@
 
     <RadioGroup
         android:id="@+id/radio_group"
+        android:layout_marginTop="20dp"
         android:layout_below="@id/amount_tip_percent"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_alignRight="@id/amount_bill"
+        android:layout_alignLeft="@id/label_bill">
         <RadioButton android:id="@+id/radio_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10%"/>
+            android:text="10%"
+            android:onClick="onRadioButtonClicked"/>
         <RadioButton android:id="@+id/radio_fifteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="15%"/>
+            android:text="15%"
+            android:onClick="onRadioButtonClicked"/>
         <RadioButton android:id="@+id/radio_twenty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20%"/>
+            android:text="20%"
+            android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
 
 
