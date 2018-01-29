@@ -52,15 +52,15 @@
         android:layout_alignRight="@id/amount_bill"
         android:layout_alignLeft="@id/label_bill">
         <RadioButton android:id="@+id/radio_ten"
-            android:text="10%"
+            android:text="@string/radio_10"
             style="@style/RadioButtonStyle"
             android:onClick="onRadioButtonClicked"/>
         <RadioButton android:id="@+id/radio_fifteen"
-            android:text="15%"
+            android:text="@string/radio_15"
             style="@style/RadioButtonStyle"
             android:onClick="onRadioButtonClicked"/>
         <RadioButton android:id="@+id/radio_twenty"
-            android:text="20%"
+            android:text="@string/radio_20"
             style="@style/RadioButtonStyle"
             android:onClick="onRadioButtonClicked"/>
     </RadioGroup>

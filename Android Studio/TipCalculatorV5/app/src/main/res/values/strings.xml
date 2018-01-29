@@ -10,4 +10,9 @@
     <string name = "amount_tip_percent_hint">Enter tip %</string>
 
     <string name = "button_calculate">CALCULATE</string>
+
+
+    <string name="radio_10">10%</string>
+    <string name="radio_15">15%</string>
+    <string name="radio_20">20%</string>
 </resources>
