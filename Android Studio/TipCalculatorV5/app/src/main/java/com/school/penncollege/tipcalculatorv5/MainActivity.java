@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         {
 
             String _text = (String) rb.getText();
-            _text = _text.replace('%', ' ');
+            _text = _text.replaceAll("%", "");
 
 
             tipEditText = ( EditText ) findViewById( R.id.amount_tip_percent );
