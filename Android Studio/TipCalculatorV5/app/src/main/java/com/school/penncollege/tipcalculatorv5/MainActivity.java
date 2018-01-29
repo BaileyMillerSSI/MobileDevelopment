@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import java.text.NumberFormat;
 
@@ -32,17 +34,16 @@ public class MainActivity extends AppCompatActivity {
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
+        RadioButton rb = ((RadioButton) view);
+        if(checked)
+        {
 
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.radio_ten:
-                if (checked)
+            String _text = (String) rb.getText();
+            _text.replace('%', ' ');
 
-                    break;
-            case R.id.radio_fifteen:
-                if (checked)
 
-                    break;
+            tipEditText = ( EditText ) findViewById( R.id.amount_tip_percent );
+            tipEditText.setText(_text);
         }
     }
 
