@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 rd = (RadioButton) findViewById(R.id.radio_fifteen);
                 rd.setChecked(true);
                 break;
-                
+
             case "20":
                 rd = (RadioButton) findViewById(R.id.radio_twenty);
                 rd.setChecked(true);
