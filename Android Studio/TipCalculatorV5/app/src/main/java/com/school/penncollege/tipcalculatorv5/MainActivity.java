@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         TextChangeHandler tch = new TextChangeHandler( );
         billEditText.addTextChangedListener( tch );
         tipEditText.addTextChangedListener(tch);
+
+
+        RadioButton rd = (RadioButton) findViewById(R.id.radio_ten);
+        rd.setChecked(true);
+
+        tipEditText.setText("10");
     }
 
 
@@ -55,6 +61,28 @@ public class MainActivity extends AppCompatActivity {
         String billString = billEditText.getText( ).toString( );
         String tipString = tipEditText.getText( ).toString( );
 
+        RadioButton rd;
+
+        if(tipString == "10")
+        {
+            rd = (RadioButton) findViewById(R.id.radio_ten);
+            rd.setChecked(true);
+        }else if(tipString == "15")
+        {
+            rd = (RadioButton) findViewById(R.id.radio_fifteen);
+            rd.setChecked(true);
+        }else if(tipString == "20")
+        {
+            rd = (RadioButton) findViewById(R.id.radio_twenty);
+            rd.setChecked(true);
+        }
+
+
+
+
+
+
+
         TextView tipTextView =
                 ( TextView ) findViewById( R.id.amount_tip );
         TextView totalTextView =
@@ -80,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     private class TextChangeHandler implements TextWatcher {
         public void afterTextChanged( Editable e ) {
             calculate( );
+
         }
 
         public void beforeTextChanged( CharSequence s, int start,
@@ -87,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void onTextChanged( CharSequence s, int start,
-                                   int before, int after ) {
+                                   int before, int after )
+        {
+
         }
     }
 }
