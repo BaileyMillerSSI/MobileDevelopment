@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_alignLeft="@id/label_bill"
         android:layout_alignRight="@id/amount_bill"
-        android:background="#FF00" />
+        android:background="@color/LineColor" />
 
     <TextView
         android:id="@+id/label_tip"
