@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Buttons</string>
+    <string name="app_name">In Class Rotation Demo</string>
     <string name="btn1">Landscape Screen!</string>
     <string name="btn2">Portrait Screen!</string>
 </resources>
