@@ -8,11 +8,10 @@ import java.util.Date;
 
 public class TodoItem
 {
-    public int ItemId;
-    public boolean IsDone;
-    public String Title;
-    public Date DateCreated;
-
+    private int ItemId;
+    private boolean IsDone;
+    private String Title;
+    private Date DateCreated;
 
 
     public TodoItem(String t)
@@ -21,7 +20,12 @@ public class TodoItem
         this.DateCreated = new Date();
         this.IsDone = false;
     }
-    
+
+    public int GetId()
+    {
+        return  this.ItemId;
+    }
+
     public boolean GetStatus()
     {
         return this.IsDone;
