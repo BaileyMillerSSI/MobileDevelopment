@@ -14,11 +14,12 @@ public class TodoItem
     private Date DateCreated;
 
 
-    public TodoItem(String t)
+    public TodoItem(int id)
     {
-        this.Title = t;
-        this.DateCreated = new Date();
-        this.IsDone = false;
+        this.ItemId = id;
+
+        // Get data from the database
+        this.GetData();
     }
 
     public int GetId()
@@ -34,6 +35,7 @@ public class TodoItem
     public void SetStatus(boolean status)
     {
         this.IsDone = status;
+        this.UpdateDatabase();
     }
 
     public String GetTitle()
@@ -46,4 +48,18 @@ public class TodoItem
         return this.DateCreated;
     }
 
+
+
+    // Have the model tell the database an update has occurred?
+    private void UpdateDatabase()
+    {
+        // Call a static method that updates the database according to this model
+        // Database.UpdateModel(this);
+    }
+
+    private void GetData()
+    {
+        // Call a static method that gets all the fields from the database for this model
+        // Database.GetModel(this.ItemId);
+    }
 }
