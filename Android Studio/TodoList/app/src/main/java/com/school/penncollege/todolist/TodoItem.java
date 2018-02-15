@@ -59,6 +59,6 @@ public class TodoItem
     private void GetData()
     {
         // Call a static method that gets all the fields from the database for this model
-        // Database.GetModel(this.ItemId);
+        // Database.GetModel(this);
     }
 }
