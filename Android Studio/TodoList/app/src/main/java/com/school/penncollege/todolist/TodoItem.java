@@ -17,7 +17,6 @@ public class TodoItem
     public TodoItem(int id)
     {
         this.ItemId = id;
-
         // Get data from the database
         this.GetData();
     }
