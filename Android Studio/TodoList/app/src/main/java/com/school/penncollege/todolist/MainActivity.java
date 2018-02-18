@@ -20,11 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
         //MainActivity.dbManager.DeleteAll();
 
+        // Creates a new ToDo item in the database
+
         //TodoItem tst = new TodoItem("Bailey was here!", new Date(), new Date(), false);
 
         // Get Me a list of all the todo items
         ArrayList<TodoItem> items = new ArrayList<TodoItem>();
         for (int id: MainActivity.dbManager.selectAll()) {
+            // Retrieves a ToDo item from the database based on Id
             items.add(new TodoItem(id));
         }
 
