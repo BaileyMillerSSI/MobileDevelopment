@@ -7,21 +7,32 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.view.View;
 import android.widget.Toast;
 
 import java.text.NumberFormat;
+=======
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Date;
+>>>>>>> origin/master
 
 public class MainActivity extends AppCompatActivity {
     DbHelper dbHelper;
     ArrayAdapter<String> mAdapter;
     ListView lTask;
 
+    public static DatabaseManager dbManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.dbManager = new DatabaseManager(this);
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
         dbHelper = new DbHelper(this);
 
         lTask = (ListView)findViewById(R.id.lTask);
@@ -89,5 +100,31 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, pay,
                     Toast.LENGTH_LONG).show();
         }
+=======
+
+        //MainActivity.dbManager.DeleteAll();
+
+        // Creates a new ToDo item in the database
+
+        //TodoItem tst = new TodoItem("Bailey was here!", new Date(), new Date(), false);
+
+        // Get Me a list of all the todo items
+        ArrayList<TodoItem> items = new ArrayList<TodoItem>();
+        for (int id: MainActivity.dbManager.selectAll()) {
+            // Retrieves a ToDo item from the database based on Id
+            items.add(new TodoItem(id));
+        }
+
+        // Test Cases
+        // Get the first one
+        TodoItem first = items.get(0);
+        // Log it's status
+        Log.d("Item Status", Integer.toString(first.GetStatus()));
+        // Change status
+        first.ToggleStatus();
+        // Log status
+        Log.d("Item Status", Integer.toString(first.GetStatus()));
+        // Restart application and these will be backwards now
+>>>>>>> origin/master
     }
 }
