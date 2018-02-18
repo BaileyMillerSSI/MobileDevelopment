@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        MainActivity.dbManager.DeleteAll();
+        //MainActivity.dbManager.DeleteAll();
 
-        TodoItem tst = new TodoItem("Bailey was here!", new Date(), new Date(), false);
+        //TodoItem tst = new TodoItem("Bailey was here!", new Date(), new Date(), false);
 
         // Get Me a list of all the todo items
         ArrayList<TodoItem> items = new ArrayList<TodoItem>();
