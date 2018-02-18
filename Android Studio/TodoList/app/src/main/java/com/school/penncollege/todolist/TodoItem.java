@@ -12,7 +12,7 @@ public class TodoItem
     private boolean IsDone;
     private String Title;
     private Date DateCreated;
-
+    private Date DateDue;
 
     public TodoItem(int id)
     {
