@@ -120,6 +120,18 @@ public class DatabaseManager extends SQLiteOpenHelper
         }
     }
 
+    public ArrayList<TodoItem> GetAllTasks( ) {
+
+        ArrayList<TodoItem> AllTasks = new ArrayList<TodoItem>( );
+
+        for (int id: selectAll())
+        {
+            AllTasks.add(new TodoItem(id));
+        }
+
+        return AllTasks;
+    }
+
     public void select( TodoItem item ) {
         String sqlQuery = "select title, dateDue, dateCreated, isDone from " + TableName;
         sqlQuery += " where id = " + item.GetId();
