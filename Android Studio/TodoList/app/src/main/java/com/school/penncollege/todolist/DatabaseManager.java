@@ -91,6 +91,7 @@ public class DatabaseManager extends SQLiteOpenHelper
 
     public ArrayList<Integer> selectAll( ) {
         String sqlQuery = "select id from " + TableName;
+        sqlQuery += " order by dateDue asc";
 
 
         String name = this.getDatabaseName();

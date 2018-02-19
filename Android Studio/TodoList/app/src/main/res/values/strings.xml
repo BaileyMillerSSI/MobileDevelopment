@@ -12,4 +12,7 @@
     <string name="button_add">ADD</string>
     <string name="button_back">BACK</string>
     <string name="button_delete">Delete</string>
+
+    <string name="checkMark">\u2713</string>
+    <string name="blankMark">\u2298</string>
 </resources>
