@@ -10,4 +10,5 @@
     <string name="label_price">Price</string>
     <string name="button_add">ADD</string>
     <string name="button_back">BACK</string>
+    <string name="task">Task</string>
 </resources>

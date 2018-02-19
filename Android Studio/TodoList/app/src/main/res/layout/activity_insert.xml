@@ -7,7 +7,7 @@
         android:id="@+id/task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="true"
+        android:layout_alignLeft="@id/task_title"
         android:layout_marginTop="50dp"
         android:text="@string/task" />
 
@@ -15,9 +15,9 @@
         android:id="@+id/input_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/label_name"
+        android:layout_alignBottom="@+id/title"
         android:layout_marginLeft="50dp"
-        android:layout_toRightOf="@+id/label_name"
+        android:layout_toRightOf="@+id/title"
         android:orientation="horizontal" />
 
     <TextView
