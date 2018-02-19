@@ -53,7 +53,7 @@
         android:layout_alignLeft="@+id/label_date"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/label_task"
-        android:inputType="numberDecimal" />
+        android:inputType="text" />
 
 
     <Button
