@@ -7,17 +7,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import android.view.View;
 import android.widget.Toast;
 
 import java.text.NumberFormat;
-=======
+//=======
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
->>>>>>> origin/master
+//>>>>>>> origin/master
 
 public class MainActivity extends AppCompatActivity {
     DbHelper dbHelper;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         MainActivity.dbManager = new DatabaseManager(this);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
         dbHelper = new DbHelper(this);
 
         lTask = (ListView)findViewById(R.id.lTask);
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, pay,
                     Toast.LENGTH_LONG).show();
         }
-=======
+//=======
 
         //MainActivity.dbManager.DeleteAll();
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get Me a list of all the todo items
         ArrayList<TodoItem> items = new ArrayList<TodoItem>();
-        for (int id: MainActivity.dbManager.selectAll()) {
+        for(int id: MainActivity.dbManager.selectAll()) {
             // Retrieves a ToDo item from the database based on Id
             items.add(new TodoItem(id));
         }
@@ -125,6 +125,6 @@ public class MainActivity extends AppCompatActivity {
         // Log status
         Log.d("Item Status", Integer.toString(first.GetStatus()));
         // Restart application and these will be backwards now
->>>>>>> origin/master
+//>>>>>>> origin/master
     }
 }

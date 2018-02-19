@@ -20,16 +20,16 @@ public class InsertActivity extends AppCompatActivity {
 
     public void insert( View v ) {
         // Retrieve name and price
-        EditText nameEditText = ( EditText) findViewById( R.id.input_task );
-        EditText priceEditText = ( EditText) findViewById( R.id.input_date );
-        String name = nameEditText.getText( ).toString( );
-        String priceString = priceEditText.getText( ).toString( );
+        EditText taskEditText = ( EditText) findViewById( R.id.input_task );
+        EditText dateEditText = ( EditText) findViewById( R.id.input_date );
+        String task = taskEditText.getText( ).toString( );
+        String dateString = dateEditText.getText( ).toString( );
 
-        // insert new candy in database
+        // insert new task in database
         try {
-            String task = String.copyValueOf()
+            String task = String.copyValueOf();
             Task candy = new Candy( 0, name, price );
-            dbManager.insert( candy );
+            dbManager.insert(name);
             Toast.makeText( this, "Task added", Toast.LENGTH_SHORT ).show( );
         } catch( NumberFormatException nfe ) {
             Toast.makeText( this, "error", Toast.LENGTH_LONG ).show( );
