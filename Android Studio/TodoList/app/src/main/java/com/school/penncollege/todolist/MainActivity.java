@@ -1,4 +1,5 @@
 package com.school.penncollege.todolist;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,13 +36,14 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager( ).getDefaultDisplay( ).getSize( size );
         buttonWidth = size.x / 2;
 
-
-        MainActivity.dbManager.DeleteAll();
-
-        new TodoItem("Bailey was here 1", new Date(), new Date("2/18/2018"),false);
-        new TodoItem("Bailey was here 2", new Date(), new Date("2/10/2018"),false);
         loadTaskList();
     }
+
+    protected void onResume( ) {
+        super.onResume( );
+        loadTaskList();
+    }
+
 
     private void loadTaskList(){
 
@@ -73,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void GoToInsert(View view) {
+        Intent insertIntent = new Intent( this, InsertActivity.class );
+        this.startActivity( insertIntent );
+    }
+
+    public void GoToDelete(View view) {
+        //Intent deleteIntent = new Intent( this, DeleteActivity.class );
+        //this.startActivity( deleteIntent );
+    }
 }
 
 class ButtonHandler implements View.OnClickListener {

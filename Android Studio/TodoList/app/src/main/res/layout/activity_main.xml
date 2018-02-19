@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.school.penncollege.todolist.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ScrollView>
 
-</RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:tint="@android:color/white"
+        android:clickable="true"
+        android:id="@+id/AddBtn"
+        android:onClick="GoToInsert"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:src="@android:drawable/ic_input_delete"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@id/AddBtn"
+        app:layout_anchorGravity="top"
+        android:layout_gravity="top|end"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:clickable="true"
+        android:tint="@android:color/white"
+        android:onClick="GoToDelete"/>
+</android.support.design.widget.CoordinatorLayout>
+
+
+

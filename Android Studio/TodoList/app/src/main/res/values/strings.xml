@@ -9,9 +9,14 @@
 
     <string name="label_name">Name</string>
     <string name="label_price">Price</string>
-    <string name="button_add">ADD</string>
+
+    <string name="button_add">Add</string>
+    <string name="button_cancel">Cancel</string>
     <string name="button_back">BACK</string>
     <string name="button_delete">Delete</string>
+
+    <string name="text_title">Title</string>
+    <string name="text_date">Due Date</string>
 
     <string name="checkMark">\u2713</string>
     <string name="blankMark">\u2298</string>
