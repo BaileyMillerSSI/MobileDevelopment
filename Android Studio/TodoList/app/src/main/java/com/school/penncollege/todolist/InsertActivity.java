@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -45,7 +46,6 @@ public class InsertActivity extends AppCompatActivity {
             } catch (ParseException e) {
 
             }
-
             goBack(v);
         }
     }
