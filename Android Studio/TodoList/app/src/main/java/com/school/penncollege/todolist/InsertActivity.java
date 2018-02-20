@@ -5,44 +5,46 @@ package com.school.penncollege.todolist;
  */
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class InsertActivity extends AppCompatActivity {
-    private DatabaseManager dbManager;
+
 
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        dbManager = new DatabaseManager( this );
         setContentView( R.layout.activity_insert );
-    }
-
-    public void insert( View v ) {
-        // Retrieve task and due date
-        EditText taskEditText = ( EditText) findViewById( R.id.input_task );
-        EditText dateEditText = ( EditText) findViewById( R.id.input_date );
-        String taskString = taskEditText.getText( ).toString( );
-        String dateDueString = dateEditText.getText( ).toString();
-        Boolean status = False;
-        String dateCurString = "Current Date";
-
-        // insert new task in database
-        try {
-            String task = String.copyValueOf();
-            TodoItem newTask = new TodoItem(taskString,dateDueString,dateCurString, status);
-            dbManager.insert(newTask);
-            Toast.makeText( this, "Task added", Toast.LENGTH_SHORT ).show( );
-        } catch( NumberFormatException nfe ) {
-            Toast.makeText( this, "error", Toast.LENGTH_LONG ).show( );
-        }
-
-        // clear data
-        nameEditText.setText( "" );
-        priceEditText.setText( "" );
+        final EditText date = findViewById(R.id.editDate);
+        final SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        date.setText(formatter.format(new Date()));
     }
 
     public void goBack( View v ) {
         this.finish( );
+    }
+
+    public void saveAndExit(View v)
+    {
+        EditText t = findViewById(R.id.editTitle);
+        EditText date = findViewById(R.id.editDate);
+
+
+        if(t.getText().toString().length() != 0)
+        {
+            try {
+                new TodoItem(t.getText().toString(), new Date(), (new SimpleDateFormat("MM/dd/yyyy")).parse(date.getText().toString()), false);
+            } catch (ParseException e) {
+
+            }
+            goBack(v);
+        }
     }
 }
