@@ -22,7 +22,7 @@ public class DeleteActivity extends AppCompatActivity {
 
         Point size = new Point( );
         getWindowManager( ).getDefaultDisplay( ).getSize( size );
-        buttonWidth = size.x;
+        buttonWidth = size.x/2;
 
         loadTaskList();
     }
