@@ -22,11 +22,9 @@ public class InsertActivity extends AppCompatActivity {
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_insert );
-
         final EditText date = findViewById(R.id.editDate);
         final SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         date.setText(formatter.format(new Date()));
-
     }
 
     public void goBack( View v ) {
