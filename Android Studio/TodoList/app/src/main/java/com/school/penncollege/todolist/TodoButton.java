@@ -19,6 +19,8 @@ public class TodoButton extends Button
 {
     private TodoItem item;
 
+    private boolean IsDeleted;
+
     public TodoButton(Context c, TodoItem i)
     {
         super(c);
@@ -30,18 +32,29 @@ public class TodoButton extends Button
 
     public String GetTitle()
     {
-        String firstPart = "";
-        if(item.GetStatus() == 1)
+        if(IsDeleted)
         {
-            // True
-            firstPart = getResources().getString(R.string.checkMark);
+            return "Deleted!";
         }else
         {
-            // False
-            firstPart = getResources().getString(R.string.blankMark);
+            String firstPart = "";
+            if(item.GetStatus() == 1)
+            {
+                // True
+                firstPart = getResources().getString(R.string.checkMark);
+            }else
+            {
+                // False
+                firstPart = getResources().getString(R.string.blankMark);
+            }
+            String title = firstPart + " | " + item.GetTitle(false) + " - " + item.GetDueTime(false);
+            return  title;
         }
-        String title = firstPart + " | " + item.GetTitle(false) + " - " + item.GetDueTime(false);
-        return  title;
+    }
+
+    public void SetDeleted()
+    {
+        IsDeleted = true;
     }
 
     public void UpdateView()
@@ -67,6 +80,11 @@ public class TodoButton extends Button
             String message = e.getMessage();
         }
 
+    }
+
+    public TodoItem getItem()
+    {
+        return  item;
     }
 
     public void UpdateText()

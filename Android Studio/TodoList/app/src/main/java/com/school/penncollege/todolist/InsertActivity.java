@@ -28,47 +28,6 @@ public class InsertActivity extends AppCompatActivity {
 
     }
 
-    public static int getCountSubString(String str , String sub) {
-        int n = 0, m = 0, counter = 0, counterSub = 0;
-        while (n < str.length()) {
-            counter = 0;
-            m = 0;
-            while (m < sub.length() && str.charAt(n) == sub.charAt(m)) {
-                counter++;
-                m++;
-                n++;
-            }
-            if (counter == sub.length()) {
-                counterSub++;
-                continue;
-            } else if (counter > 0) {
-                continue;
-            }
-            n++;
-        }
-
-        return counterSub;
-    }
-
-    public void insert( View v ) {
-        // Get all the values
-        // Get Title
-        // Get DateDue
-
-        //v.findViewById(R.id.input_title);
-        //v.findViewById(R.id.input_Date_Due);
-
-        // Create using the model
-        // This will create a new todo item and store it in the database
-        new TodoItem("", new Date(), new Date(), false);
-
-        // Reset the view
-        // Reset Title
-
-        // Reset Due Date
-
-    }
-
     public void goBack( View v ) {
         this.finish( );
     }
@@ -78,12 +37,16 @@ public class InsertActivity extends AppCompatActivity {
         EditText t = findViewById(R.id.editTitle);
         EditText date = findViewById(R.id.editDate);
 
-        try {
-            new TodoItem(t.getText().toString(), new Date(), (new SimpleDateFormat("MM/dd/yyyy")).parse(date.getText().toString()), false);
-        } catch (ParseException e) {
 
+        if(t.getText().toString().length() != 0)
+        {
+            try {
+                new TodoItem(t.getText().toString(), new Date(), (new SimpleDateFormat("MM/dd/yyyy")).parse(date.getText().toString()), false);
+            } catch (ParseException e) {
+
+            }
+
+            goBack(v);
         }
-
-        goBack(v);
     }
 }
