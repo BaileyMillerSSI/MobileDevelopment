@@ -25,14 +25,14 @@ public class PuzzleEngine
         switch(size)
         {
             case PuzzleEngine.EasyMode:
-                this.Board = new int[3][3];
+                CreateGameBoard(3,3);
                 break;
             case PuzzleEngine.MediumMode:
-                this.Board = new int[3][4];
+                CreateGameBoard(3,4);
                 break;
 
             case PuzzleEngine.HardMode:
-                this.Board = new int[4][4];
+                CreateGameBoard(4,4);
                 break;
         }
     }
@@ -50,9 +50,15 @@ public class PuzzleEngine
             //Create all the columns
             for(int w = 0; w < width; w++)
             {
-                //Create all the rows
-                this.Board[h][w] = runningCount;
-                runningCount+=1;
+                if(runningCount != totalBlocks)
+                {
+                    //Create all the rows
+                    this.Board[h][w] = runningCount;
+                    runningCount+=1;
+                }else
+                {
+                    this.Board[h][w] = -1; // Marks the blank spot on the board
+                }
             }
         }
     }
