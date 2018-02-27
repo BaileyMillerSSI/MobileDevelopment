@@ -36,4 +36,24 @@ public class PuzzleEngine
                 break;
         }
     }
+
+
+    private void CreateGameBoard(int width, int height)
+    {
+        this.Board = new int[width][height];
+
+        // Create the game board across
+        int totalBlocks = width*height; //Easy = 9 blocks
+        int runningCount = 1;
+        for (int h = 0; h < height; h++)
+        {
+            //Create all the columns
+            for(int w = 0; w < width; w++)
+            {
+                //Create all the rows
+                this.Board[h][w] = runningCount;
+                runningCount+=1;
+            }
+        }
+    }
 }
