@@ -27,9 +27,11 @@ public class Puzzle {
 
     public boolean solved( String [][] solution ) {
         if( solution != null && solution.length == parts.length ) {
-            for( int i = 0; i < parts.length; i++ ) {
-                if( !solution[i].equals( parts[i] ) )
-                    return false;
+            for (int i=0; i<parts.length; i++) {
+                for (int j = 0; j < parts[i].length; j++) {
+                    if (!solution[i][j].equals(parts[i][j]))
+                        return false;
+                }
             }
             return true;
         }
