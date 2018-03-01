@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -57,9 +58,8 @@ private PuzzleEngine _puzzle;
             statusBarHeight = res.getDimensionPixelSize( resourceId );
 
         int puzzleHeight = screenHeight - statusBarHeight - actionBarHeight;
-puzzleView = new PuzzleView( this, puzzleWidth, puzzleHeight, _puzzle.GetRow(), _puzzle.GetWidth() );
-String[] scam = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", " "};
-puzzleView.fillGui(scam);
+puzzleView = new PuzzleView( this, puzzleWidth, puzzleHeight, _puzzle );
+
 puzzleView.enableListener( this );
 
         setContentView( puzzleView );
@@ -79,25 +79,27 @@ puzzleView.enableListener( this );
         int action = event.getAction( );
         switch( action ) {
             case MotionEvent.ACTION_DOWN:
-                // initialize data before move
+               // initialize data before move
                 puzzleView.updateStartPositions( index, ( int ) event.getY( ) );
                 // bring v to front
                 puzzleView.bringChildToFront( v );
                 break;
             case MotionEvent.ACTION_MOVE:
-                // update y position of TextView being moved
-                puzzleView.moveTextViewVertically( index, ( int ) event.getY( ) );
+                // Determine if this piece is allowed to move
+                // If can move switch places with the blank spot
+                puzzleView.MoveToBlank(v);
                 break;
             case MotionEvent.ACTION_UP:
-                // move is complete: swap the 2 TextViews
+               // move is complete: swap the 2 TextViews
                 int newPosition = puzzleView.tvPosition( index );
                 puzzleView.placeTextViewAtPosition( index, newPosition );
                 // if user just won, disable listener to stop the game
-                if( puzzle.solved( puzzleView.currentSolution( ) ) )
+               if( puzzle.solved( puzzleView.currentSolution( ) ) )
                    puzzleView.disableListener( );
                 break;
             }
-                return true;
+//                return true;
+        return true;
         }
 
 

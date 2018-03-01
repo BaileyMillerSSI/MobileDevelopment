@@ -7,12 +7,14 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.graphics.Color;
 
-public class PuzzleView extends RelativeLayout {
-    private TextView [] tvs;
-    private LayoutParams [] params;
+public class PuzzleView extends TableLayout {
+    private GameView [] tvs;
+    private PuzzleEngine puzzle;
 
     private int labelHeight;
     private int startY; // start y coordinate of TextView being moved
@@ -21,46 +23,55 @@ public class PuzzleView extends RelativeLayout {
     private int [] positions;
 
     public PuzzleView( Activity activity, int width, int height,
-                       int rows, int columns ) {
+                       PuzzleEngine puzzle) {
         super( activity );
-        buildGuiByCode( activity, width, height, rows, columns );
+        this.puzzle = puzzle;
+        buildGuiByCode( activity, width, height, puzzle);
     }
 
-    public void buildGuiByCode( Activity activity, int width, int height,
-                                int rows, int columns ) {
-        positions = new int[rows * columns];
-        tvs = new TextView[rows * columns];
-        params = new LayoutParams[tvs.length];
-        Random random = new Random( );
-        labelHeight = height / rows;
-        for( int i = 0; i < tvs.length; i++ ) {
-            tvs[i] = new TextView( activity );
-            tvs[i].setGravity( Gravity.CENTER );
-            params[i] = new LayoutParams( width/columns, labelHeight );
-            tvs[i].setBackgroundColor( getResources().getColor(R.color.pale));
-            params[i].leftMargin = 0;
-            params[i].topMargin = labelHeight * i;
-            addView( tvs[i], params[i] );
-        }
-    }
+    public void buildGuiByCode( Activity activity, int width, int height, PuzzleEngine puzzle) {
 
-    public void fillGui( String [] scrambledText ) {
-        int minFontSize = 16;
-        for( int i = 0; i < tvs.length; i++ ) {
-            tvs[i].setText( scrambledText[i] );
-            positions[i] = i;
+        tvs = new GameView[puzzle.GetCurrentGameSize()];
+        int pos = 0;
+        for (int i = 0; i < puzzle.GetRow(); i++ )
+        {
+            // Create all the rows
+            TableRow tr = new TableRow(activity);
 
-            tvs[i].setWidth( params[i].width );
-            tvs[i].setPadding( 20, 5, 20, 5 );
+            for (int x = 0; x< puzzle.GetWidth(); x++)
+            {
+                // Create all the columns per row
+                GameView tv = new GameView(i, x, activity);
+                tv.setGravity(Gravity.CENTER);
+                String text = (puzzle.GetTextAt(i, x));
+                tv.setText(text);
+                tv.setBackgroundColor( getResources().getColor(R.color.pale));
+
+                int h = height / puzzle.GetRow();
+                int w = width / puzzle.GetWidth();
+
+                int finalSize = 0;
+
+                if(h < w)
+                    finalSize = h;
+                else
+                    finalSize = w;
+
+                tv.setWidth(finalSize);
+                tv.setHeight(finalSize);
+
+                tvs[pos] = tv;
+                pos+=1;
+                tr.addView(tv);
+            }
+
+            addView(tr);
         }
-        // set font size for TextViews
-        for( int i = 0; i < tvs.length; i++ )
-            tvs[i].setTextSize( TypedValue.COMPLEX_UNIT_SP, minFontSize );
     }
 
     // Returns the index of tv within the array tvs
     public int indexOfTextView( View tv ) {
-        if( ! ( tv instanceof TextView ) )
+        if( ! ( tv instanceof GameView ) )
             return -1;
         for( int i = 0; i < tvs.length; i++ ) {
             if( tv == tvs[i] )
@@ -70,15 +81,19 @@ public class PuzzleView extends RelativeLayout {
     }
 
     public void updateStartPositions( int index, int y ) {
-        startY = params[index].topMargin;
-        startTouchY = y;
-        emptyPosition = tvPosition( index );
+//        startY = params[index].topMargin;
+//        startTouchY = y;
+//        emptyPosition = tvPosition( index );
     }
 
     // moves the TextView at index index
-    public void moveTextViewVertically( int index, int y ) {
-        params[index].topMargin = startY + y - startTouchY;
-        tvs[index].setLayoutParams( params[index] );
+    public void MoveToBlank(View v)
+    {
+        // Switch places with the blank
+
+        // Update the game board
+
+        //Reload the UI
     }
 
     public void enableListener( OnTouchListener listener ) {
@@ -94,38 +109,39 @@ public class PuzzleView extends RelativeLayout {
     // Returns position index within screen of TextField at index tvIndex
     // Accuracy is half a TextView's height
     public int tvPosition( int tvIndex ) {
-        return ( params[tvIndex].topMargin + labelHeight/2 ) / labelHeight;
+        return 0;
     }
 
     // Swaps tvs[tvIndex] and tvs[positions[toPosition]]
     public void placeTextViewAtPosition( int tvIndex, int toPosition ) {
         // Move current TextView to position position
-        params[tvIndex].topMargin = toPosition * labelHeight;
-        tvs[tvIndex].setLayoutParams( params[tvIndex] );
+//        params[tvIndex].topMargin = toPosition * labelHeight;
+//        tvs[tvIndex].setLayoutParams( params[tvIndex] );
 
         // Move TextView just replaced to empty spot
-        int index = positions[toPosition];
-        params[index].topMargin = emptyPosition * labelHeight;
-        tvs[index].setLayoutParams( params[index] );
+//        int index = positions[toPosition];
+//        params[index].topMargin = emptyPosition * labelHeight;
+//        tvs[index].setLayoutParams( params[index] );
 
         // Reset positions values
-        positions[emptyPosition] = index;
-        positions[toPosition] = tvIndex;
+//        positions[emptyPosition] = index;
+//        positions[toPosition] = tvIndex;
     }
 
     // Returns the current user solution as an array of Strings
     public String [] currentSolution( ) {
-        String [] current = new String[tvs.length];
-        for( int i = 0; i < current.length; i++ )
-            current[i] = tvs[positions[i]].getText( ).toString( );
-
-        return current;
+//        String [] current = new String[tvs.length];
+//        for( int i = 0; i < current.length; i++ )
+//            current[i] = tvs[positions[i]].getText( ).toString( );
+//
+//        return current;
+        return new String[0];
     }
 
     // returns index of TextView whose location includes y
     public int indexOfTextView( int y ) {
         int position = y / labelHeight;
-        return positions[position];
+        return 0;
     }
 
     // returns text inside TextView whose index is tvIndex

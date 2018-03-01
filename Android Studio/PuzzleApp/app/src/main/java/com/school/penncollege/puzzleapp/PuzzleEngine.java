@@ -26,9 +26,27 @@ public class PuzzleEngine
         return Board.length;
     }
 
+    public String GetTextAt(int x, int y)
+    {
+        try
+        {
+            int num = Board[x][y];
+            if(num != -1)
+                return Integer.toString(num);
+            else
+            {
+                return " ";
+            }
+        }catch (Exception e)
+        {
+            return "";
+        }
+    }
+
     public PuzzleEngine(int size)
     {
         // Can I create a basic gameboard?
+        this.CurrentGameMode = PuzzleEngine.EasyMode;
         Board = new int[3][3];
         Board[0][0] = 1;
         Board[0][1] = 2;
