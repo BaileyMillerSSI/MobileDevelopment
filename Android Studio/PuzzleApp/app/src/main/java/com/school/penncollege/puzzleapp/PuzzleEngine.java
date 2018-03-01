@@ -1,5 +1,7 @@
 package com.school.penncollege.puzzleapp;
 
+import android.graphics.Point;
+
 public class PuzzleEngine
 {
     // Used for starting games
@@ -82,6 +84,11 @@ public class PuzzleEngine
 //                break;
 //
 //        }
+    }
+
+    public Point GetBlankSpace()
+    {
+        // Find space that has the -1 in it
     }
 
 

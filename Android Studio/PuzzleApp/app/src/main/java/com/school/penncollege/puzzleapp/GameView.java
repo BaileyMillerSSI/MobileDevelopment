@@ -19,4 +19,15 @@ public class GameView extends TextView
         this.x = x;
         this.y = y;
     }
+
+    public int GetX()
+    {
+        return x;
+    }
+
+    public int GetY()
+    {
+        return y;
+    }
+
 }
