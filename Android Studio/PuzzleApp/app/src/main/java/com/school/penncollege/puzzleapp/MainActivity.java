@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public static int ACTION_BAR_HEIGHT = 56; // in dp
 private PuzzleView puzzleView;
 private Puzzle puzzle;
+private PuzzleEngine _puzzle;
 
     private int statusBarHeight;
     private int actionBarHeight;
@@ -30,6 +31,8 @@ private Puzzle puzzle;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         puzzle = new Puzzle( );
+        _puzzle = new PuzzleEngine(PuzzleEngine.EasyMode);
+
 
         Point size = new Point( );
         getWindowManager( ).getDefaultDisplay( ).getSize( size );
@@ -54,9 +57,9 @@ private Puzzle puzzle;
             statusBarHeight = res.getDimensionPixelSize( resourceId );
 
         int puzzleHeight = screenHeight - statusBarHeight - actionBarHeight;
-puzzleView = new PuzzleView( this, puzzleWidth, puzzleHeight, puzzle.getNumberOfParts( ) );
-String [] scrambled = puzzle.scramble( );
-puzzleView.fillGui( scrambled );
+puzzleView = new PuzzleView( this, puzzleWidth, puzzleHeight, _puzzle.GetRow(), _puzzle.GetWidth() );
+String[] scam = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", " "};
+puzzleView.fillGui(scam);
 puzzleView.enableListener( this );
 
         setContentView( puzzleView );

@@ -13,7 +13,6 @@ import android.graphics.Color;
 public class PuzzleView extends RelativeLayout {
     private TextView [] tvs;
     private LayoutParams [] params;
-    private int [] colors;
 
     private int labelHeight;
     private int startY; // start y coordinate of TextView being moved
@@ -22,26 +21,23 @@ public class PuzzleView extends RelativeLayout {
     private int [] positions;
 
     public PuzzleView( Activity activity, int width, int height,
-                       int numberOfPieces ) {
+                       int rows, int columns ) {
         super( activity );
-        buildGuiByCode( activity, width, height, numberOfPieces );
+        buildGuiByCode( activity, width, height, rows, columns );
     }
 
     public void buildGuiByCode( Activity activity, int width, int height,
-                                int numberOfPieces ) {
-        positions = new int[numberOfPieces];
-        tvs = new TextView[numberOfPieces];
-        colors = new int[tvs.length];
+                                int rows, int columns ) {
+        positions = new int[rows * columns];
+        tvs = new TextView[rows * columns];
         params = new LayoutParams[tvs.length];
         Random random = new Random( );
-        labelHeight = height / numberOfPieces;
+        labelHeight = height / rows;
         for( int i = 0; i < tvs.length; i++ ) {
             tvs[i] = new TextView( activity );
             tvs[i].setGravity( Gravity.CENTER );
-            colors[i] = Color.rgb( random.nextInt( 255 ),
-                    random.nextInt( 255 ),	random.nextInt( 255 ) );
-            tvs[i].setBackgroundColor( colors[i] );
-            params[i] = new LayoutParams( width, labelHeight );
+            params[i] = new LayoutParams( width/columns, labelHeight );
+            tvs[i].setBackgroundColor( getResources().getColor(R.color.pale));
             params[i].leftMargin = 0;
             params[i].topMargin = labelHeight * i;
             addView( tvs[i], params[i] );
@@ -49,20 +45,14 @@ public class PuzzleView extends RelativeLayout {
     }
 
     public void fillGui( String [] scrambledText ) {
-        int minFontSize = DynamicSizing.MAX_FONT_SIZE;
+        int minFontSize = 16;
         for( int i = 0; i < tvs.length; i++ ) {
             tvs[i].setText( scrambledText[i] );
             positions[i] = i;
 
             tvs[i].setWidth( params[i].width );
             tvs[i].setPadding( 20, 5, 20, 5 );
-
-            // find font size dynamically
-            int fontSize = DynamicSizing.setFontSizeToFitInView( tvs[i] );
-            if( minFontSize > fontSize )
-                minFontSize = fontSize;
         }
-        Log.w("MainActivity", "font size = " + minFontSize);
         // set font size for TextViews
         for( int i = 0; i < tvs.length; i++ )
             tvs[i].setTextSize( TypedValue.COMPLEX_UNIT_SP, minFontSize );
