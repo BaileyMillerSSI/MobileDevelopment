@@ -54,8 +54,8 @@ private Puzzle puzzle;
             statusBarHeight = res.getDimensionPixelSize( resourceId );
 
         int puzzleHeight = screenHeight - statusBarHeight - actionBarHeight;
-puzzleView = new PuzzleView( this, puzzleWidth, puzzleHeight, puzzle.getNumberOfParts( ) );
-String [] scrambled = puzzle.scramble( );
+puzzleView = new PuzzleView( this, puzzleWidth, puzzleHeight, puzzle.getNumberOfRows( ),puzzle.getNumberCol() );
+String [][] scrambled = puzzle.scramble( );
 puzzleView.fillGui( scrambled );
 puzzleView.enableListener( this );
 
@@ -77,18 +77,18 @@ puzzleView.enableListener( this );
         switch( action ) {
             case MotionEvent.ACTION_DOWN:
                 // initialize data before move
-                puzzleView.updateStartPositions( index, ( int ) event.getY( ) );
+                puzzleView.updateStartPositions( index, index, ( int ) event.getY( ) );
                 // bring v to front
                 puzzleView.bringChildToFront( v );
                 break;
             case MotionEvent.ACTION_MOVE:
                 // update y position of TextView being moved
-                puzzleView.moveTextViewVertically( index, ( int ) event.getY( ) );
+                puzzleView.moveTextViewVertically( index, index, ( int ) event.getY( ) );
                 break;
             case MotionEvent.ACTION_UP:
                 // move is complete: swap the 2 TextViews
-                int newPosition = puzzleView.tvPosition( index );
-                puzzleView.placeTextViewAtPosition( index, newPosition );
+                int newPosition = puzzleView.tvPosition( index, index );
+                puzzleView.placeTextViewAtPosition( index,index, newPosition );
                 // if user just won, disable listener to stop the game
                 if( puzzle.solved( puzzleView.currentSolution( ) ) )
                    puzzleView.disableListener( );
@@ -102,13 +102,15 @@ puzzleView.enableListener( this );
             extends GestureDetector.SimpleOnGestureListener {
         public boolean onDoubleTapEvent( MotionEvent event ) {
             int touchY = ( int ) event.getRawY( );
+            int touchX = ( int ) event.getRawX();
             // y coordinate of the touch within puzzleView is
             // touchY - actionBarHeight - statusBarHeight
-            int index = puzzleView.indexOfTextView( touchY
+            int col = puzzleView.indexOfTextViewCol( touchX,touchY
                     - actionBarHeight - statusBarHeight );
-            if( puzzleView.getTextViewText( index )
+            int row = puzzleView.indexOfTextViewRow(touchX,touchY-actionBarHeight-statusBarHeight);
+            if( puzzleView.getTextViewText(touchX, touchY )
                     .equals( puzzle.wordToChange( ) ) )
-                puzzleView.setTextViewText( index, puzzle.replacementWord( ) );
+                puzzleView.setTextViewText( row,col, puzzle.replacementWord( ) );
             return  true;
         }
     }

@@ -58,9 +58,10 @@ public class Puzzle {
         return scrambled;
     }
 
-    public int getNumberOfParts( ) {
+    public int getNumberOfRows( ) {
         return parts.length;
     }
+    public int getNumberCol( ){return parts[0].length;}
 
     public String wordToChange( ) {
         return "MOBILE";
