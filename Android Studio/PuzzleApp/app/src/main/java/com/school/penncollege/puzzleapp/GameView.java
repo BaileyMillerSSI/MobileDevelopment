@@ -1,6 +1,7 @@
 package com.school.penncollege.puzzleapp;
 
 import android.annotation.SuppressLint;
+import android.graphics.Point;
 import android.widget.TextView;
 import android.content.Context;
 
@@ -28,6 +29,11 @@ public class GameView extends TextView
     public int GetY()
     {
         return y;
+    }
+
+    public Point GetPoint()
+    {
+        return new Point(GetX(), GetY());
     }
 
 }

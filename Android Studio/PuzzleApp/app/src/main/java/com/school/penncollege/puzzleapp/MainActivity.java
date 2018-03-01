@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public static int STATUS_BAR_HEIGHT = 24; // in dp
     public static int ACTION_BAR_HEIGHT = 56; // in dp
 private PuzzleView puzzleView;
-private Puzzle puzzle;
 private PuzzleEngine _puzzle;
 
     private int statusBarHeight;
@@ -31,7 +30,6 @@ private PuzzleEngine _puzzle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        puzzle = new Puzzle( );
         _puzzle = new PuzzleEngine(PuzzleEngine.EasyMode);
 
 
@@ -64,9 +62,7 @@ puzzleView.enableListener( this );
 
         setContentView( puzzleView );
 
-        DoubleTapHandler dth = new DoubleTapHandler( );
-        detector = new GestureDetector( this, dth );
-        detector.setOnDoubleTapListener( dth );
+        detector = new GestureDetector( this, new GestureDetector.SimpleOnGestureListener());
     }
 
     public boolean onTouchEvent( MotionEvent event ) {
@@ -76,46 +72,36 @@ puzzleView.enableListener( this );
 
     public boolean onTouch( View v, MotionEvent event ) {
         int index = puzzleView.indexOfTextView( v );
+        GameView gv = (GameView)v;
         int action = event.getAction( );
         switch( action ) {
             case MotionEvent.ACTION_DOWN:
-               // initialize data before move
-                puzzleView.updateStartPositions( index, ( int ) event.getY( ) );
                 // bring v to front
                 puzzleView.bringChildToFront( v );
                 break;
             case MotionEvent.ACTION_MOVE:
+
+                if( _puzzle.solved(_puzzle.GetBoard()) )
+                {
+                    puzzleView.disableListener( );
+                    break;
+                }
+
                 // Determine if this piece is allowed to move
-                // If can move switch places with the blank spot
-                puzzleView.MoveToBlank(v);
+                if(_puzzle.CanMove(_puzzle.GetBlankSpace(), gv.GetPoint()))
+                {
+                    // Switch with blank space
+                    puzzleView.MoveToBlank(v);
+                }
                 break;
             case MotionEvent.ACTION_UP:
-               // move is complete: swap the 2 TextViews
-                int newPosition = puzzleView.tvPosition( index );
-                puzzleView.placeTextViewAtPosition( index, newPosition );
                 // if user just won, disable listener to stop the game
-               if( puzzle.solved( puzzleView.currentSolution( ) ) )
+              if( _puzzle.solved(_puzzle.GetBoard()) )
                    puzzleView.disableListener( );
                 break;
             }
 //                return true;
         return true;
         }
-
-
-    private class DoubleTapHandler
-            extends GestureDetector.SimpleOnGestureListener {
-        public boolean onDoubleTapEvent( MotionEvent event ) {
-            int touchY = ( int ) event.getRawY( );
-            // y coordinate of the touch within puzzleView is
-            // touchY - actionBarHeight - statusBarHeight
-            int index = puzzleView.indexOfTextView( touchY
-                    - actionBarHeight - statusBarHeight );
-            if( puzzleView.getTextViewText( index )
-                    .equals( puzzle.wordToChange( ) ) )
-                puzzleView.setTextViewText( index, puzzle.replacementWord( ) );
-            return  true;
-        }
-    }
 }
 
