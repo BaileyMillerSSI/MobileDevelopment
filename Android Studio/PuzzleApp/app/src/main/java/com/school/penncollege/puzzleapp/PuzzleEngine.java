@@ -16,25 +16,54 @@ public class PuzzleEngine
     {
         return this.CurrentGameMode;
     }
+    public int GetWidth()
+    {
+        return Board[0].length;
+    }
+
+    public int GetRow()
+    {
+        return Board.length;
+    }
 
     public PuzzleEngine(int size)
     {
-        this.CurrentGameMode = size;
+        // Can I create a basic gameboard?
+        Board = new int[3][3];
+        Board[0][0] = 1;
+        Board[0][1] = 2;
+        Board[0][2] = 3;
 
-        // Determine game mode
-        switch(size)
-        {
-            case PuzzleEngine.EasyMode:
-                CreateGameBoard(3,3);
-                break;
-            case PuzzleEngine.MediumMode:
-                CreateGameBoard(3,4);
-                break;
+        Board[1][0] = 4;
+        Board[1][1] = 5;
+        Board[1][2] = 6;
 
-            case PuzzleEngine.HardMode:
-                CreateGameBoard(4,4);
-                break;
-        }
+        Board[2][0] = 7;
+        Board[2][1] = 8;
+        Board[2][2] = -1;
+
+//        // Determine game mode
+//        switch(size)
+//        {
+//            case PuzzleEngine.EasyMode:
+//                CreateGameBoard(3,3);
+//                this.CurrentGameMode = size;
+//                break;
+//            case PuzzleEngine.MediumMode:
+//                CreateGameBoard(3,4);
+//                this.CurrentGameMode = size;
+//                break;
+//
+//            case PuzzleEngine.HardMode:
+//                CreateGameBoard(4,4);
+//                this.CurrentGameMode = size;
+//                break;
+//            default:
+//                CreateGameBoard(3, 3);
+//                this.CurrentGameMode = PuzzleEngine.EasyMode;
+//                break;
+//
+//        }
     }
 
 

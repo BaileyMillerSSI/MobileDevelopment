@@ -11,9 +11,14 @@ import android.widget.TextView;
 import android.graphics.Color;
 
 public class PuzzleView extends RelativeLayout {
+<<<<<<< HEAD
     private TextView [][] tvs;
     private LayoutParams [][] params;
     private int [][] colors;
+=======
+    private TextView [] tvs;
+    private LayoutParams [] params;
+>>>>>>> 5d43575ac931d038239ba9ea77501d90e27351fb
 
     private int labelHeight;
     private int labelWidth;
@@ -23,6 +28,7 @@ public class PuzzleView extends RelativeLayout {
     private int [][] positions;
 
     public PuzzleView( Activity activity, int width, int height,
+<<<<<<< HEAD
                        int numRow, int numCol ) {
         super( activity );
         buildGuiByCode( activity, width, height, numRow, numCol );
@@ -70,6 +76,40 @@ public class PuzzleView extends RelativeLayout {
         }
 
         Log.w("MainActivity", "font size = " + minFontSize);
+=======
+                       int rows, int columns ) {
+        super( activity );
+        buildGuiByCode( activity, width, height, rows, columns );
+    }
+
+    public void buildGuiByCode( Activity activity, int width, int height,
+                                int rows, int columns ) {
+        positions = new int[rows * columns];
+        tvs = new TextView[rows * columns];
+        params = new LayoutParams[tvs.length];
+        Random random = new Random( );
+        labelHeight = height / rows;
+        for( int i = 0; i < tvs.length; i++ ) {
+            tvs[i] = new TextView( activity );
+            tvs[i].setGravity( Gravity.CENTER );
+            params[i] = new LayoutParams( width/columns, labelHeight );
+            tvs[i].setBackgroundColor( getResources().getColor(R.color.pale));
+            params[i].leftMargin = 0;
+            params[i].topMargin = labelHeight * i;
+            addView( tvs[i], params[i] );
+        }
+    }
+
+    public void fillGui( String [] scrambledText ) {
+        int minFontSize = 16;
+        for( int i = 0; i < tvs.length; i++ ) {
+            tvs[i].setText( scrambledText[i] );
+            positions[i] = i;
+
+            tvs[i].setWidth( params[i].width );
+            tvs[i].setPadding( 20, 5, 20, 5 );
+        }
+>>>>>>> 5d43575ac931d038239ba9ea77501d90e27351fb
         // set font size for TextViews
         for (int i = 0; i < tvs.length; i++) {
             for (int j = 0; j < tvs[i].length; j++) {
