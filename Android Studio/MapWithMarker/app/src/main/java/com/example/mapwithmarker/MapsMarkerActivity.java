@@ -16,9 +16,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsMarkerActivity extends AppCompatActivity
         implements OnMapReadyCallback {
 
+    public MapHelpers MapHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MapHelper = new MapHelpers(this);
+        MapHelper.getLocationPermission();
+
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
         // Get the SupportMapFragment and request notification
