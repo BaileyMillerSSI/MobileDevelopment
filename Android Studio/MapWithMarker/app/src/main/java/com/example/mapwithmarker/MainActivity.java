@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
     public void updateTrip(View v) {
         String address = addressET.getText().toString();
         boolean goodGeoCoding = true;
-        if (!address.equals(destinationAddress)) {
+        if (true) {
             destinationAddress = address;
             Geocoder coder = new Geocoder(this);
             try {
@@ -98,13 +98,22 @@ public class MainActivity extends AppCompatActivity
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            Log.d("PERM", "No Perm.");
             return;
         }else
         {
-
+            DoLocationStuff();
         }
 
+    }
+
+    private void DoLocationStuff()
+    {
+        FusedLocationProviderApi flpa = LocationServices.FusedLocationApi;
+        @SuppressLint("MissingPermission") Location current = flpa.getLastLocation(gac);
+        if (current != null) {
+            distanceTV.setText(manager.milesToDestination(current));
+            timeLeftTV.setText(manager.timeToDestination(current));
+        }
     }
 
     @Override
@@ -112,12 +121,7 @@ public class MainActivity extends AppCompatActivity
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE:
-                FusedLocationProviderApi flpa = LocationServices.FusedLocationApi;
-                @SuppressLint("MissingPermission") Location current = flpa.getLastLocation(gac);
-                if (current != null) {
-                    distanceTV.setText(manager.milesToDestination(current));
-                    timeLeftTV.setText(manager.timeToDestination(current));
-                }
+                DoLocationStuff();
                 break;
         }
     }
