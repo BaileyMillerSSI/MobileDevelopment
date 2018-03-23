@@ -19,7 +19,7 @@
 
         <activity
             android:name=".MapsMarkerActivity"
-            android:label="HI MY NAME JEFF!">
+            android:label="HI MY NAME is JEFF!">
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
