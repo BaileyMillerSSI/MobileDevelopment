@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity
     private final static int REQUEST_CODE = 100;
     private GoogleApiClient gac;
     private TravelManager manager;
-    private EditText addressET;
-    private TextView distanceTV;
-    private TextView timeLeftTV;
     private String destinationAddress = "1533 West Southern Ave. South Williamsport Pa.";
 
     @Override
@@ -46,9 +43,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         manager = new TravelManager();
-        addressET = (EditText) findViewById(R.id.destination_et);
-        distanceTV = (TextView) findViewById(R.id.distance_tv);
-        timeLeftTV = (TextView) findViewById(R.id.time_left_tv);
 
         gac = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -63,57 +57,33 @@ public class MainActivity extends AppCompatActivity
         updateTrip(null);
     }
 
-    public void updateTrip(View v) {
-        String address = addressET.getText().toString();
-        boolean goodGeoCoding = true;
-        if (true) {
-            destinationAddress = address;
-            Geocoder coder = new Geocoder(this);
-            try {
-                // geocode destination
-                List<Address> addresses
-                        = coder.getFromLocationName(destinationAddress, 5);
-                if (addresses != null && addresses.size() != 0) {
-                    double latitude = addresses.get(0).getLatitude();
-                    double longitude = addresses.get(0).getLongitude();
-                    Location destinationLocation = new Location("destination");
-                    destinationLocation.setLatitude(latitude);
-                    destinationLocation.setLongitude(longitude);
-                    manager.setDestination(destinationLocation);
-                }
-            } catch (IOException ioe) {
-                goodGeoCoding = false;
-            }
-        }
+    public void updateTrip(View v)
+    {
+        //manager.setDestination(destinationLocation);
 
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if ( CheckPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) && CheckPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION))
+        {
+            RequestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }else
         {
-            DoLocationStuff();
-        }
 
+        }
     }
 
-    private void DoLocationStuff()
+    private void RequestPermissions(String[] perms, int reqCode)
     {
-        FusedLocationProviderApi flpa = LocationServices.FusedLocationApi;
-        @SuppressLint("MissingPermission") Location current = flpa.getLastLocation(gac);
-        if (current != null) {
-            distanceTV.setText(manager.milesToDestination(current));
-            timeLeftTV.setText(manager.timeToDestination(current));
-        }
+        ActivityCompat.requestPermissions(this, perms, reqCode);
+    }
+
+    private void RequestPermission(String perm)
+    {
+        ActivityCompat.shouldShowRequestPermissionRationale(this, perm);
+    }
+
+    private boolean CheckPermission(String perm)
+    {
+        return ActivityCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_DENIED;
     }
 
     @Override
@@ -121,7 +91,7 @@ public class MainActivity extends AppCompatActivity
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE:
-                DoLocationStuff();
+
                 break;
         }
     }
