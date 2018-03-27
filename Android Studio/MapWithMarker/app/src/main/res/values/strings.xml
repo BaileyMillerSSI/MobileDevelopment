@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">GpsV3</string>
+  <string name="app_name">Treasure Hunter</string>
   <string name="enter_destination">Enter destination</string>
   <string name="button_text">Update</string>
 </resources>
