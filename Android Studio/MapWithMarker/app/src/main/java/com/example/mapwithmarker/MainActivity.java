@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity
         FusedLocationProviderApi flpa = LocationServices.FusedLocationApi;
         LocationRequest request = new LocationRequest();
         request.setInterval(30000);
-        // request.setPriority( LocationRequest.PRIORITY_HIGH_ACCURACY );
-        // request.setSmallestDisplacement( 100 );
+        request.setPriority( LocationRequest.PRIORITY_HIGH_ACCURACY );
+        request.setSmallestDisplacement( 100 );
         if (gac.isConnected())
         {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

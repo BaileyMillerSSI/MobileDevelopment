@@ -10,26 +10,4 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.mapwithmarker.MainActivity">
 
-    <EditText
-        android:id="@+id/destination_et"
-        android:hint="@string/enter_destination"
-        style="@style/WrappedAndCentered" />
-
-    <TextView
-        android:id="@+id/distance_tv"
-        android:layout_below="@id/destination_et"
-        style="@style/WrappedAndCentered" />
-
-    <TextView
-        android:id="@+id/time_left_tv"
-        android:layout_below="@id/distance_tv"
-        style="@style/WrappedAndCentered" />
-
-    <Button
-        android:id="@+id/miles_time_button"
-        android:layout_below="@id/time_left_tv"
-        android:text="@string/button_text"
-        android:onClick="updateTrip"
-        style="@style/WrappedAndCentered" />
-
 </RelativeLayout>
