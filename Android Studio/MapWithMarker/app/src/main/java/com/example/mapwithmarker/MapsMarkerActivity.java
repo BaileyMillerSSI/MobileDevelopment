@@ -78,7 +78,7 @@ public class MapsMarkerActivity extends AppCompatActivity
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(120000); // two minute interval
         mLocationRequest.setFastestInterval(120000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -113,8 +113,8 @@ public class MapsMarkerActivity extends AppCompatActivity
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title("Current Position");
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.smiley_launcher));
+                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
                 //move map camera
