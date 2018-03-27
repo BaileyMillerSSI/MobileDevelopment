@@ -19,7 +19,7 @@
 
         <activity
             android:name=".MapsMarkerActivity"
-            android:label="Maps Treasure Hunter"
+            android:label="Treasure Hunter"
             android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
