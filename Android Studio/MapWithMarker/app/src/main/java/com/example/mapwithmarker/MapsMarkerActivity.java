@@ -49,6 +49,7 @@ public class MapsMarkerActivity extends AppCompatActivity
     LocationRequest mLocationRequest;
     Location mLastLocation;
     Marker mCurrLocationMarker;
+    Marker mTreasureLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
 
     @Override
@@ -118,19 +119,21 @@ public class MapsMarkerActivity extends AppCompatActivity
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title("Current Position");
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.smiley_launcher));
-                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
+                mGoogleMap.setMyLocationEnabled(false);
                 //move map camera
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
-                
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
 
-                MarkerOptions finalPoint = new MarkerOptions();
-                finalPoint.position(getRandomLocation(latLng, 1000));
-                finalPoint.title("Current Position");
-                finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+
+                if(mTreasureLocationMarker == null)
+                {
+                    MarkerOptions finalPoint = new MarkerOptions();
+                    finalPoint.position(getRandomLocation(latLng, 250));
+                    finalPoint.title("Treasure Position");
+                    finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                    mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
+                }
 
             }
         };
@@ -153,7 +156,7 @@ public class MapsMarkerActivity extends AppCompatActivity
             Random random = new Random();
 
             // Convert radius from feet to meters to degrees
-            double radiusInDegrees = (radius * 0.3048) / 111000f;
+            double radiusInDegrees = (radius) / 111000f;
 
             double u = random.nextDouble();
             double v = random.nextDouble();

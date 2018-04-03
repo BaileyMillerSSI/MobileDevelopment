@@ -19,7 +19,6 @@
 
         <activity
             android:name=".MapsMarkerActivity"
-            android:label="Treasure Hunter"
             android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
