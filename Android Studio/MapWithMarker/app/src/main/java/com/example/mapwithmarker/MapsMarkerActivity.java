@@ -48,6 +48,7 @@ public class MapsMarkerActivity extends AppCompatActivity
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
     Location mLastLocation;
+    LatLng treasureLocation;
     Marker mCurrLocationMarker;
     Marker mTreasureLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
@@ -108,7 +109,7 @@ public class MapsMarkerActivity extends AppCompatActivity
         @Override
         public void onLocationResult(LocationResult locationResult) {
             for (Location location : locationResult.getLocations()) {
-                Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
+
                 mLastLocation = location;
                 if (mCurrLocationMarker != null) {
                     mCurrLocationMarker.remove();
@@ -122,18 +123,26 @@ public class MapsMarkerActivity extends AppCompatActivity
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
 
                 mGoogleMap.setMyLocationEnabled(false);
+
                 //move map camera
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
 
 
                 if(mTreasureLocationMarker == null)
                 {
+                    treasureLocation = getRandomLocation(latLng, 250);
                     MarkerOptions finalPoint = new MarkerOptions();
-                    finalPoint.position(getRandomLocation(latLng, 250));
+                    finalPoint.position(treasureLocation);
                     finalPoint.title("Treasure Position");
                     finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
                     mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
                 }
+
+                Location treasure = new Location("");
+                treasure.setLatitude(treasureLocation.latitude);
+                treasure.setLongitude(treasureLocation.longitude);
+                float distance = location.distanceTo(treasure);
+                Log.i("Distance", String.valueOf(distance));
 
             }
         };
