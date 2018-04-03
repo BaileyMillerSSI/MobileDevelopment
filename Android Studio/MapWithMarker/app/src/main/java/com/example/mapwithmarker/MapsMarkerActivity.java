@@ -3,6 +3,7 @@ package com.example.mapwithmarker;
 
 import android.*;
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -32,6 +34,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,6 +56,8 @@ public class MapsMarkerActivity extends AppCompatActivity
     Marker mCurrLocationMarker;
     Marker mTreasureLocationMarker;
     FusedLocationProviderClient mFusedLocationClient;
+    TextView Distance;
+    TextView Direction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,10 @@ public class MapsMarkerActivity extends AppCompatActivity
 
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
+
+
+        Distance = (TextView) findViewById(R.id.distance);
+        Direction = (TextView)findViewById(R.id.direction);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -106,6 +116,7 @@ public class MapsMarkerActivity extends AppCompatActivity
     }
 
     LocationCallback mLocationCallback = new LocationCallback(){
+        @SuppressLint("MissingPermission")
         @Override
         public void onLocationResult(LocationResult locationResult) {
             for (Location location : locationResult.getLocations()) {
@@ -130,7 +141,7 @@ public class MapsMarkerActivity extends AppCompatActivity
 
                 if(mTreasureLocationMarker == null)
                 {
-                    treasureLocation = getRandomLocation(latLng, 250);
+                    treasureLocation = getRandomLocation(latLng, 15);
                     MarkerOptions finalPoint = new MarkerOptions();
                     finalPoint.position(treasureLocation);
                     finalPoint.title("Treasure Position");
@@ -142,7 +153,8 @@ public class MapsMarkerActivity extends AppCompatActivity
                 treasure.setLatitude(treasureLocation.latitude);
                 treasure.setLongitude(treasureLocation.longitude);
                 float distance = location.distanceTo(treasure);
-
+                Distance.setText("Distance: " + String.valueOf(distance) + "m");
+                Direction.setText("Move in a direction bruh!");
             }
         };
 
@@ -163,7 +175,7 @@ public class MapsMarkerActivity extends AppCompatActivity
 
             Random random = new Random();
 
-            // Convert radius from feet to meters to degrees
+            // Convert radius from meters to degrees
             double radiusInDegrees = (radius) / 111000f;
 
             double u = random.nextDouble();
