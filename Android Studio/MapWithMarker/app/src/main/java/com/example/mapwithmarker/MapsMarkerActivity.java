@@ -140,14 +140,14 @@ public class MapsMarkerActivity extends AppCompatActivity
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
 
 
-                if(mTreasureLocationMarker == null)
+                if(treasureLocation == null)
                 {
                     treasureLocation = getRandomLocation(latLng, 15);
-                    MarkerOptions finalPoint = new MarkerOptions();
-                    finalPoint.position(treasureLocation);
-                    finalPoint.title("Treasure Position");
-                    finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-                    mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
+//                    MarkerOptions finalPoint = new MarkerOptions();
+//                    finalPoint.position(treasureLocation);
+//                    finalPoint.title("Treasure Position");
+//                    finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+//                    mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
                 }
 
                 Location treasure = new Location("");
