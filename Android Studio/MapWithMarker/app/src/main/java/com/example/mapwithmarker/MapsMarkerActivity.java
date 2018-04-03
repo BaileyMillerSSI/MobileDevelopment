@@ -92,6 +92,7 @@ public class MapsMarkerActivity extends AppCompatActivity
                     android.Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 //Location Permission already granted
+
                 mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                 mGoogleMap.setMyLocationEnabled(true);
             } else {
@@ -120,8 +121,8 @@ public class MapsMarkerActivity extends AppCompatActivity
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title("Current Position");
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.smiley_launcher));
                 mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
-
                 mGoogleMap.setMyLocationEnabled(false);
 
                 //move map camera
