@@ -143,19 +143,29 @@ public class MapsMarkerActivity extends AppCompatActivity
                 if(treasureLocation == null)
                 {
                     treasureLocation = getRandomLocation(latLng, 15);
-//                    MarkerOptions finalPoint = new MarkerOptions();
-//                    finalPoint.position(treasureLocation);
-//                    finalPoint.title("Treasure Position");
-//                    finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-//                    mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
                 }
 
                 Location treasure = new Location("");
                 treasure.setLatitude(treasureLocation.latitude);
                 treasure.setLongitude(treasureLocation.longitude);
                 float distance = location.distanceTo(treasure);
-                Distance.setText("Distance: " + String.valueOf(distance) + "m");
-                Direction.setText("Move in a direction bruh!");
+
+
+                if(distance <= 1)
+                {
+                    MarkerOptions finalPoint = new MarkerOptions();
+                    finalPoint.position(treasureLocation);
+                    finalPoint.title("Treasure Position");
+                    finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                    mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
+
+                    Distance.setText("");
+                    Direction.setText("You found the treasure!");
+                }else
+                {
+                    Distance.setText("Distance: " + String.valueOf(distance) + "m");
+                    Direction.setText("Move in a direction bruh!");
+                }
             }
         };
 
