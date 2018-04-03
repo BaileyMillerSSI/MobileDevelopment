@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity
     private final static int REQUEST_CODE = 100;
     private GoogleApiClient gac;
     private TravelManager manager;
-    private String destinationAddress = "1533 West Southern Ave. South Williamsport Pa.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
