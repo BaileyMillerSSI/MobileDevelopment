@@ -142,7 +142,6 @@ public class MapsMarkerActivity extends AppCompatActivity
                 treasure.setLatitude(treasureLocation.latitude);
                 treasure.setLongitude(treasureLocation.longitude);
                 float distance = location.distanceTo(treasure);
-                Log.i("Distance", String.valueOf(distance));
 
             }
         };
