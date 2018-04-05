@@ -93,8 +93,8 @@ public class MapsMarkerActivity extends AppCompatActivity
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(30000); // 30 seconds
-        mLocationRequest.setFastestInterval(30000);
+        mLocationRequest.setInterval(5000); // 5 seconds
+        mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -148,7 +148,7 @@ public class MapsMarkerActivity extends AppCompatActivity
                 Location treasure = new Location("");
                 treasure.setLatitude(treasureLocation.latitude);
                 treasure.setLongitude(treasureLocation.longitude);
-                float distance = location.distanceTo(treasure);
+                int distance = Math.round(location.distanceTo(treasure));
 
 
                 if(distance <= 1)
