@@ -93,8 +93,8 @@ public class MapsMarkerActivity extends AppCompatActivity
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(120000); // two minute interval
-        mLocationRequest.setFastestInterval(120000);
+        mLocationRequest.setInterval(30000); // 30 seconds
+        mLocationRequest.setFastestInterval(30000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -138,7 +138,7 @@ public class MapsMarkerActivity extends AppCompatActivity
 
                 //move map camera
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 19));
-
+                mGoogleMap.setBuildingsEnabled(false);
 
                 if(treasureLocation == null)
                 {
@@ -164,12 +164,38 @@ public class MapsMarkerActivity extends AppCompatActivity
                 }else
                 {
                     Distance.setText("Distance: " + String.valueOf(distance) + "m");
-                    Direction.setText("Move in a direction bruh!");
+                    Direction.setText(GetDirection(location, treasure));
                 }
             }
         };
 
     };
+
+    public String GetDirection(Location curPos, Location destination)
+    {
+
+        float bearing = curPos.bearingTo(destination);
+        if(bearing < 0)
+        {
+            bearing = bearing+360;
+        }
+
+        if(bearing <= 45 || (bearing > 315 && bearing <= 360))
+        {
+            return "Go North";
+        }else if(bearing > 45 && bearing <= 135)
+        {
+            return "Go East";
+        }else if(bearing > 135 && bearing <= 225)
+        {
+            return  "Go South";
+        }else if(bearing > 225 && bearing <= 315)
+        {
+            return  "Go West";
+        }
+
+        return "";
+    }
 
     public LatLng getRandomLocation(LatLng point, int radius) {
 
