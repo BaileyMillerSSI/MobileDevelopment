@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -158,7 +159,8 @@ public class MapsMarkerActivity extends AppCompatActivity
                     finalPoint.title("Treasure Position");
                     finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
                     mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
-
+                    Intent gameActivity = new Intent(getApplicationContext(),Puzzle.class);
+                    startActivity(gameActivity);
                     Distance.setText("");
                     Direction.setText("You found the treasure!");
                 }else
