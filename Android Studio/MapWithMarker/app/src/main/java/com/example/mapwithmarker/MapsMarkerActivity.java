@@ -93,8 +93,8 @@ public class MapsMarkerActivity extends AppCompatActivity
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(5000); // 5 seconds
-        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setInterval(1000); // 1 seconds
+        mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
