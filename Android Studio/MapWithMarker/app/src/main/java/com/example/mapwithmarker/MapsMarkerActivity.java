@@ -162,7 +162,7 @@ public class MapsMarkerActivity extends AppCompatActivity
                     Intent gameActivity = new Intent(getApplicationContext(),Puzzle.class);
                     Direction.setText("You found the treasure!");
                     Distance.setText("");
-                  //  startActivity(gameActivity);
+                    startActivity(gameActivity);
 
 
                 }else
