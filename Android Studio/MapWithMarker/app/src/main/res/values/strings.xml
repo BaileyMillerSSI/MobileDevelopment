@@ -1,3 +1,4 @@
 <resources>
-  <string name="app_name">Penn College Treasure Hunt</string>
+    <string name="app_name">Penn College Treasure Hunt</string>
+    <string name="title_activity_game">GameActivity</string>
 </resources>
