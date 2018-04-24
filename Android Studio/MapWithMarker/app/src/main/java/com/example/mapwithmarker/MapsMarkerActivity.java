@@ -143,7 +143,7 @@ public class MapsMarkerActivity extends AppCompatActivity
 
                 if(treasureLocation == null)
                 {
-                    treasureLocation = getRandomLocation(latLng, 15);
+                    treasureLocation = getNextLocation(latLng, 15);
                 }
 
                 Location treasure = new Location("");
@@ -160,9 +160,11 @@ public class MapsMarkerActivity extends AppCompatActivity
                     finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
                     mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
                     Intent gameActivity = new Intent(getApplicationContext(),Puzzle.class);
-                    startActivity(gameActivity);
-                    Distance.setText("");
                     Direction.setText("You found the treasure!");
+                    Distance.setText("");
+                  //  startActivity(gameActivity);
+
+
                 }else
                 {
                     Distance.setText("Distance: " + String.valueOf(distance) + "m");
@@ -199,46 +201,13 @@ public class MapsMarkerActivity extends AppCompatActivity
         return "";
     }
 
-    public LatLng getRandomLocation(LatLng point, int radius) {
+    public LatLng getNextLocation(LatLng point, int radius) {
 
-        List<LatLng> randomPoints = new ArrayList<>();
-        List<Float> randomDistances = new ArrayList<>();
-        Location myLocation = new Location("");
-        myLocation.setLatitude(point.latitude);
-        myLocation.setLongitude(point.longitude);
 
-        //This is to generate 10 random points
-        for(int i = 0; i<10; i++) {
-            double x0 = point.latitude;
-            double y0 = point.longitude;
 
-            Random random = new Random();
+        LatLng randomLatLng = new LatLng(41.238521, -77.023526);
 
-            // Convert radius from meters to degrees
-            double radiusInDegrees = (radius) / 111000f;
-
-            double u = random.nextDouble();
-            double v = random.nextDouble();
-            double w = radiusInDegrees * Math.sqrt(u);
-            double t = 2 * Math.PI * v;
-            double x = w * Math.cos(t);
-            double y = w * Math.sin(t);
-
-            // Adjust the x-coordinate for the shrinking of the east-west distances
-            double new_x = x / Math.cos(y0);
-
-            double foundLatitude = new_x + x0;
-            double foundLongitude = y + y0;
-            LatLng randomLatLng = new LatLng(foundLatitude, foundLongitude);
-            randomPoints.add(randomLatLng);
-            Location l1 = new Location("");
-            l1.setLatitude(randomLatLng.latitude);
-            l1.setLongitude(randomLatLng.longitude);
-            randomDistances.add(l1.distanceTo(myLocation));
-        }
-        //Get nearest point to the centre
-        int indexOfNearestPointToCentre = randomDistances.indexOf(Collections.min(randomDistances));
-        return randomPoints.get(indexOfNearestPointToCentre);
+        return randomLatLng;
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
