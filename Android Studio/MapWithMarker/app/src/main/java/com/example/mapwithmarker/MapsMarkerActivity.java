@@ -159,9 +159,10 @@ public class MapsMarkerActivity extends AppCompatActivity
                     finalPoint.title("Treasure Position");
                     finalPoint.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
                     mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
-                    Intent gameActivity = new Intent(getApplicationContext(),Puzzle.class);
                     Direction.setText("You found the treasure!");
                     Distance.setText("");
+
+                    Intent gameActivity = new Intent(getApplicationContext(),GameActivity.class);
                     startActivity(gameActivity);
 
 
