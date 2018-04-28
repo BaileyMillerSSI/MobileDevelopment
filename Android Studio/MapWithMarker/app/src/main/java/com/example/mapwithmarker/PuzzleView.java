@@ -7,10 +7,15 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
 public class PuzzleView extends TableLayout {
     private GameView [] tvs;
     private PuzzleEngine puzzle;
     private OnTouchListener ls;
+    private int libPicture[][] =  {{R.drawable.row1col1, R.drawable.row1col2,R.drawable.row1col3},
+                                    {R.drawable.row2col1,R.drawable.row2col2,R.drawable.row2col3},
+                                    {R.drawable.row3col1,R.drawable.row3col2,R.drawable.row3col2}};
 
     private Activity a;
     private int width, height;
@@ -42,7 +47,7 @@ public class PuzzleView extends TableLayout {
                 tv.setGravity(Gravity.CENTER);
                 String text = (puzzle.GetTextAt(i, x));
                 tv.setText(text);
-                tv.setBackgroundColor( getResources().getColor(R.color.pale));
+                tv.setBackgroundResource(libPicture[x][i]);
 
                 int h = height / puzzle.GetRow();
                 int w = width / puzzle.GetWidth();
@@ -61,8 +66,9 @@ public class PuzzleView extends TableLayout {
                 pos+=1;
                 tr.addView(tv);
             }
-
             addView(tr);
+
+
         }
     }
 

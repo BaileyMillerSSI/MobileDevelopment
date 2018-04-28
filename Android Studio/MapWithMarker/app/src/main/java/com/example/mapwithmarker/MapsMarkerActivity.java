@@ -206,7 +206,7 @@ public class MapsMarkerActivity extends AppCompatActivity
 
 
 
-        LatLng randomLatLng = new LatLng(41.238521, -77.023526);
+        LatLng randomLatLng = new LatLng(41.234728, -77.022374);
 
         return randomLatLng;
     }
