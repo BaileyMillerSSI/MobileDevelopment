@@ -161,7 +161,7 @@ public class MapsMarkerActivity extends AppCompatActivity
                     mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
                     Direction.setText("You found the treasure!");
                     Distance.setText("");
-
+                    //This start the puzzle game
                     Intent gameActivity = new Intent(getApplicationContext(),GameActivity.class);
                     startActivity(gameActivity);
 

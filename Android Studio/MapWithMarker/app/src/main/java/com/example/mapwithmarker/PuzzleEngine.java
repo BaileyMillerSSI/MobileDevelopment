@@ -175,9 +175,7 @@ public class PuzzleEngine
             return false;
     }
 
-    public void SwitchPlace(Point p, Point p2)
-    {
-        // Given two points reverse their coords
+    public void SwitchPlace(Point p, Point p2) {
         int numAtP = Board[p.x][p.y];
         int numAtP2 = Board[p2.x][p2.y];
 
