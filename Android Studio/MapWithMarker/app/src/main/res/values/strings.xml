@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Map With Marker</string>
-    <string name="title_activity_maps">Map with Marker</string>
+    <string name="app_name">Penn College Treasure Hunt</string>
+    <string name="title_activity_game">Puzzle Time</string>
 </resources>
