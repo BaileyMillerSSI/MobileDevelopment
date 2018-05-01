@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private final static int REQUEST_CODE = 100;
     private GoogleApiClient gac;
     private TravelManager manager;
+    int gameTracker = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,32 +57,26 @@ public class MainActivity extends AppCompatActivity
         updateTrip(null);
     }
 
-    public void updateTrip(View v)
-    {
+    public void updateTrip(View v) {
         //manager.setDestination(destinationLocation);
 
-        if ( CheckPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) && CheckPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION))
-        {
+        if (CheckPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) && CheckPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
             RequestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
-        }else
-        {
+        } else {
 
         }
     }
 
-    private void RequestPermissions(String[] perms, int reqCode)
-    {
+    private void RequestPermissions(String[] perms, int reqCode) {
         ActivityCompat.requestPermissions(this, perms, reqCode);
     }
 
-    private void RequestPermission(String perm)
-    {
+    private void RequestPermission(String perm) {
         ActivityCompat.shouldShowRequestPermissionRationale(this, perm);
     }
 
-    private boolean CheckPermission(String perm)
-    {
+    private boolean CheckPermission(String perm) {
         return ActivityCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_DENIED;
     }
 
@@ -94,6 +89,7 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
     }
+
     protected void onPause() {
         super.onPause();
         FusedLocationProviderApi flpa = LocationServices.FusedLocationApi;
@@ -104,10 +100,9 @@ public class MainActivity extends AppCompatActivity
         FusedLocationProviderApi flpa = LocationServices.FusedLocationApi;
         LocationRequest request = new LocationRequest();
         request.setInterval(30000);
-        request.setPriority( LocationRequest.PRIORITY_HIGH_ACCURACY );
-        request.setSmallestDisplacement( 100 );
-        if (gac.isConnected())
-        {
+        request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        request.setSmallestDisplacement(100);
+        if (gac.isConnected()) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -119,42 +114,50 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
             flpa.requestLocationUpdates(gac, request, this);
-        }
-        else
-        {
-            gac.connect( );
+        } else {
+            gac.connect();
         }
 
     }
 
-    public void onConnectionSuspended( int cause ) {
+    public void onConnectionSuspended(int cause) {
     }
 
-    public void onConnectionFailed( ConnectionResult result ) {
+    public void onConnectionFailed(ConnectionResult result) {
         // test result here
-        if( result.hasResolution( ) ) { // a resolution can be started
+        if (result.hasResolution()) { // a resolution can be started
             try {
-                result.startResolutionForResult( this, REQUEST_CODE );
-            } catch( IntentSender.SendIntentException sie ) {
+                result.startResolutionForResult(this, REQUEST_CODE);
+            } catch (IntentSender.SendIntentException sie) {
                 // Intent has been cancelled or cannot execute, exit app
-                Toast.makeText( this, "Google Play services problem, exiting",
-                        Toast.LENGTH_LONG ).show( );
-                finish( );
+                Toast.makeText(this, "Google Play services problem, exiting",
+                        Toast.LENGTH_LONG).show();
+                finish();
             }
         }
     }
 
-    public void onActivityResult( int requestCode,
-                                  int resultCode, Intent data ) {
-        if( requestCode == REQUEST_CODE && resultCode == RESULT_OK ) {
+    public void onActivityResult(int requestCode,
+                                 int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
             // problem solved, try to connect again
-            gac.connect( );
+            gac.connect();
         }
     }
 
-    protected void onStart( ) {
-        super.onStart( );
-        if( gac != null )
-            gac.connect( );
+    protected void onStart() {
+        super.onStart();
+        if (gac != null)
+            gac.connect();
     }
+
+    public int GameTracker() {
+        return gameTracker;
+    }
+
+    public void updateGameTracker() {
+        gameTracker= gameTracker+1;
+
+    }
+
 }

@@ -47,7 +47,7 @@ public class PuzzleView extends TableLayout {
                 tv.setGravity(Gravity.CENTER);
                 String text = (puzzle.GetTextAt(i, x));
                 tv.setText(text);
-                tv.setBackgroundResource(libPicture[x][i]);
+                tv.setBackgroundColor(getResources().getColor(R.color.pale));
 
                 int h = height / puzzle.GetRow();
                 int w = width / puzzle.GetWidth();

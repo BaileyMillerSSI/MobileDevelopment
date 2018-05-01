@@ -208,13 +208,13 @@ public class PuzzleEngine
             }
         }
        solutionBoard= this.Board;
-        scramble();
+     //  scramble();
 
         // Ensure blank is bottom right
 
         //Find bottom right
         //[2][2]
         Point blank = GetBlankSpace();
-        SwitchPlace(new Point(2, 2), blank);
+        SwitchPlace(new Point(width-1, height-1), blank);
     }
 }

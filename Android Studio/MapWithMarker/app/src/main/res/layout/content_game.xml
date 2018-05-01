@@ -8,4 +8,13 @@
     tools:context="com.example.mapwithmarker.GameActivity"
     tools:showIn="@layout/activity_game">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/myFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/cast_abc_scrubber_control_to_pressed_mtrl_000"
+        app:elevation="4dp"
+    />
+
 </android.support.constraint.ConstraintLayout>

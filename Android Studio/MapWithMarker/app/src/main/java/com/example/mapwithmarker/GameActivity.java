@@ -1,5 +1,6 @@
 package com.example.mapwithmarker;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -30,8 +32,20 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        _puzzle = new PuzzleEngine(PuzzleEngine.EasyMode);
-
+        int gameTracker =0;
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            gameTracker = extras.getInt("game");
+        }
+        if(gameTracker==1) {
+            _puzzle = new PuzzleEngine(PuzzleEngine.EasyMode);
+        }else if(gameTracker == 2){
+            _puzzle = new PuzzleEngine(PuzzleEngine.EasyMode);
+        }else if (gameTracker == 3){
+            _puzzle = new PuzzleEngine(PuzzleEngine.HardMode);
+        }else{
+            _puzzle = new PuzzleEngine(PuzzleEngine.EasyMode);
+        }
 
         Point size = new Point( );
         getWindowManager( ).getDefaultDisplay( ).getSize( size );
@@ -84,7 +98,20 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
                 if( _puzzle.solved(_puzzle.GetBoard()) )
                 {
                     puzzleView.disableListener( );
+                    int gameTracker =0;
+                    Bundle extras = getIntent().getExtras();
+                    if(extras != null){
+                        gameTracker = extras.getInt("game");
+                    }
+                    Log.d("myTag", Integer.toString(gameTracker));
+
+                    Intent mapsActivity = new Intent(getApplicationContext(),MapsMarkerActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("gameTracker",gameTracker);
+                    mapsActivity.putExtras(bundle);
+                    startActivity(mapsActivity);
                     break;
+
                 }
 
                 // Determine if this piece is allowed to move
@@ -103,6 +130,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
 //                return true;
         return true;
     }
+
 }
 
 

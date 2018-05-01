@@ -48,7 +48,7 @@ import java.util.Random;
  */
 public class MapsMarkerActivity extends AppCompatActivity
         implements OnMapReadyCallback {
-
+    MainActivity obj = new MainActivity();
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
     LocationRequest mLocationRequest;
@@ -59,6 +59,8 @@ public class MapsMarkerActivity extends AppCompatActivity
     FusedLocationProviderClient mFusedLocationClient;
     TextView Distance;
     TextView Direction;
+    int gameTracker =0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,9 +163,15 @@ public class MapsMarkerActivity extends AppCompatActivity
                     mTreasureLocationMarker = mGoogleMap.addMarker(finalPoint);
                     Direction.setText("You found the treasure!");
                     Distance.setText("");
-                    //This start the puzzle game
+                    obj.updateGameTracker();
+                    gameTracker++;
+                    treasureLocation = null;
                     Intent gameActivity = new Intent(getApplicationContext(),GameActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("game",gameTracker);
+                    gameActivity.putExtras(bundle);
                     startActivity(gameActivity);
+
 
 
                 }else
@@ -203,11 +211,22 @@ public class MapsMarkerActivity extends AppCompatActivity
     }
 
     public LatLng getNextLocation(LatLng point, int radius) {
-
-
-
-        LatLng randomLatLng = new LatLng(41.234728, -77.022374);
-
+        LatLng randomLatLng;
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            gameTracker = extras.getInt("gameTracker");
+        }
+       // gameTracker= obj.GameTracker();
+        if(gameTracker==0) {
+            randomLatLng = new LatLng(41.234728, -77.022374);
+        }else if(gameTracker==1){
+          randomLatLng = new LatLng(41.237786, -77.025787);
+        }else if(gameTracker==2){
+           randomLatLng = new LatLng(41.238575, -77.027556);
+        }else{
+            randomLatLng = new LatLng(41.234728, -77.022374);
+            gameTracker =0;
+        }
         return randomLatLng;
     }
 
